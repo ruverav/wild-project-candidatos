@@ -15,8 +15,8 @@ la grabación; el monográfico lo recoge en la ficha técnica.
 ## Contenido
 
 - `index.html` — el monográfico completo, autocontenido (sin dependencias salvo las fuentes
-  de Google Fonts). Incluye las tres entrevistas, la comparativa cruzada por temas y hoja de
-  estilo para imprimir.
+  de Google Fonts). Incluye las tres entrevistas, la comparativa cruzada por temas, conmutador
+  de modo claro/oscuro con preferencia guardada y hoja de estilo para imprimir.
 - `resumenes.md` — los tres resúmenes en texto plano.
 - `comparativa.md` — inmigración, Ceuta, vivienda, corrupción y trenes, candidato a candidato.
 
