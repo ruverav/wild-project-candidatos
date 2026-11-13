@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>El cara a cara · The Wild Project — Especial Elecciones</title>
+<meta name="description" content="Monográfico de las tres entrevistas de Jordi Wild a los candidatos: Ada Colau, Alberto Núñez Feijóo y Pedro Sánchez.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,700;0,6..96,900;1,6..96,400;1,6..96,700&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,300;1,6..72,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#f2ede4;
+    --paper-2:#e9e2d6;
+    --ink:#14100d;
+    --ink-soft:#4c433a;
+    --ink-faint:#8b8175;
+    --rule:rgba(20,16,13,.16);
+    --rule-strong:rgba(20,16,13,.42);
+    --accent:#c0301b;
+    --accent-deep:#8c1f0f;
+    --serif:"Newsreader",Georgia,serif;
+    --display:"Bodoni Moda","Times New Roman",serif;
+    --mono:"IBM Plex Mono",ui-monospace,monospace;
+    --gut:clamp(1.15rem,4vw,3rem);
+    --max:1240px;
+  }
+
+  *,*::before,*::after{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--serif);
+    font-size:clamp(1rem,.55vw + .88rem,1.12rem);
+    line-height:1.62;
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;
+  }
+
+  /* grano de papel */
+  body::after{
+    content:"";position:fixed;inset:0;pointer-events:none;z-index:60;
+    opacity:.05;mix-blend-mode:multiply;
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.82' numOctaves='3'/%3E%3C/filter%3E%3Crect width='160' height='160' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  ::selection{background:var(--accent);color:var(--paper)}
+
+  h1,h2,h3,h4{font-family:var(--display);font-weight:700;line-height:1.02;letter-spacing:-.015em;margin:0}
+  p{margin:0 0 1.1em}
+  a{color:inherit}
+  img{max-width:100%}
+
+  .wrap{width:min(100% - 2*var(--gut),var(--max));margin-inline:auto}
+
+  /* ---------- progreso ---------- */
+  #progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--accent);z-index:70;transition:width .12s linear}
+
+  /* ---------- cabecera ---------- */
+  .masthead{
+    background:var(--ink);color:var(--paper);
+    border-bottom:1px solid var(--ink);
+  }
+  .masthead-inner{
+    display:flex;flex-wrap:wrap;align-items:baseline;gap:1rem 1.6rem;
+    padding:.85rem 0;
+    font-family:var(--mono);font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+  }
+  .masthead-inner b{font-weight:600;color:#fff}
+  .masthead-inner span{color:#a89d8f}
+  .masthead-inner .dot{color:var(--accent);font-size:1rem;line-height:0}
+
+  /* ---------- nav ---------- */
+  .nav{
+    position:sticky;top:0;z-index:50;
+    background:rgba(242,237,228,.93);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--rule);
+  }
+  .nav ul{
+    display:flex;gap:clamp(.9rem,3vw,2.2rem);list-style:none;margin:0;
+    padding:.7rem 0;overflow-x:auto;scrollbar-width:none;
+  }
+  .nav ul::-webkit-scrollbar{display:none}
+  .nav a{
+    font-family:var(--mono);font-size:.68rem;letter-spacing:.12em;text-transform:uppercase;
+    text-decoration:none;color:var(--ink-faint);white-space:nowrap;
+    padding-bottom:.15rem;border-bottom:1px solid transparent;transition:color .2s,border-color .2s;
+  }
+  .nav a:hover,.nav a:focus-visible{color:var(--ink)}
+  .nav a[aria-current="true"]{color:var(--accent);border-color:var(--accent)}
+
+  /* ---------- hero ---------- */
+  .hero{position:relative;overflow:hidden;border-bottom:1px solid var(--rule-strong);padding-block:clamp(2.4rem,7vw,5.5rem)}
+  .hero-kicker{
+    font-family:var(--mono);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--accent);margin-bottom:1.4rem;display:flex;align-items:center;gap:.7rem;
+  }
+  .hero-kicker::before{content:"";width:clamp(24px,6vw,64px);height:1px;background:var(--accent)}
+  h1.hero-title{
+    font-size:clamp(3.2rem,13vw,10.5rem);
+    font-weight:900;line-height:.82;letter-spacing:-.03em;text-transform:uppercase;
+  }
+  h1.hero-title .thin{
+    display:block;font-weight:400;font-style:italic;letter-spacing:-.01em;
+    font-size:clamp(1.5rem,4.6vw,3.4rem);text-transform:none;color:var(--accent);
+    margin-top:.28em;
+  }
+  .hero-grid{
+    display:grid;grid-template-columns:1fr;gap:clamp(1.5rem,4vw,3rem);
+    margin-top:clamp(1.8rem,4vw,3rem);align-items:end;
+  }
+  @media(min-width:860px){.hero-grid{grid-template-columns:minmax(0,1fr) 320px}}
+  .hero-lede{font-size:clamp(1.05rem,1.6vw,1.32rem);line-height:1.5;max-width:34ch;font-weight:300}
+  .hero-lede strong{font-weight:600}
+  .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--rule-strong)}
+  .stat{padding:.85rem 0;border-bottom:1px solid var(--rule)}
+  .stat:nth-child(odd){border-right:1px solid var(--rule);padding-right:1rem}
+  .stat:nth-child(even){padding-left:1rem}
+  .stat b{display:block;font-family:var(--display);font-size:clamp(1.5rem,3vw,2.1rem);font-weight:700;line-height:1}
+  .stat span{font-family:var(--mono);font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint)}
+
+  .hero-num{
+    position:absolute;right:-.06em;top:-.18em;z-index:-1;
+    font-family:var(--display);font-weight:900;font-size:clamp(14rem,42vw,34rem);
+    line-height:.7;color:transparent;-webkit-text-stroke:1px rgba(20,16,13,.10);
+    user-select:none;pointer-events:none;
+  }
+
+  /* ---------- ficha tecnica ---------- */
+  .ficha{border-bottom:1px solid var(--rule-strong);padding-block:clamp(1.6rem,3.5vw,2.6rem)}
+  .ficha-grid{display:grid;gap:1.6rem}
+  @media(min-width:760px){.ficha-grid{grid-template-columns:repeat(3,1fr);gap:2.4rem}}
+  .ficha h4{font-family:var(--mono);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+  .ficha p{font-size:.92rem;line-height:1.5;margin:0;color:var(--ink-soft)}
+  .ficha p em{color:var(--ink);font-style:italic}
+
+  /* ---------- secciones de candidato ---------- */
+  .cand{padding-block:clamp(3rem,7vw,6rem);border-bottom:1px solid var(--rule-strong);position:relative}
+  .cand-head{display:grid;grid-template-columns:auto minmax(0,1fr);gap:clamp(1rem,3vw,2.4rem);align-items:start;margin-bottom:clamp(1.6rem,3vw,2.6rem)}
+  .cand-num{
+    font-family:var(--display);font-weight:900;font-size:clamp(3.6rem,9vw,7.5rem);line-height:.72;
+    color:transparent;-webkit-text-stroke:1.5px var(--accent);
+  }
+  .kicker{font-family:var(--mono);font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 .5rem}
+  .cand h2{font-size:clamp(2.1rem,6vw,4.3rem);text-transform:uppercase;letter-spacing:-.025em}
+  .cand h2 em{font-style:italic;font-weight:400;text-transform:none;color:var(--accent)}
+  .meta{display:flex;flex-wrap:wrap;gap:.4rem 1.4rem;list-style:none;margin:1rem 0 0;padding:0;
+    font-family:var(--mono);font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-faint)}
+  .meta b{color:var(--ink);font-weight:600}
+  .meta a{text-decoration:none;border-bottom:1px solid var(--rule-strong);color:var(--ink)}
+  .meta a:hover{color:var(--accent);border-color:var(--accent)}
+
+  .cand-body{display:grid;gap:clamp(1.6rem,4vw,3.2rem)}
+  @media(min-width:980px){.cand-body{grid-template-columns:minmax(0,1fr) 290px;align-items:start}}
+  .cand-main{max-width:66ch}
+  .lead{font-size:clamp(1.02rem,1.4vw,1.18rem);line-height:1.6;color:var(--ink)}
+  .lead::first-letter{
+    float:left;font-family:var(--display);font-weight:900;font-size:3.6em;line-height:.78;
+    padding:.06em .12em 0 0;color:var(--accent);
+  }
+
+  .beat{border-top:1px solid var(--rule);padding-top:1.05rem;margin-top:1.5rem}
+  .beat h3{
+    font-family:var(--mono);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;
+    font-weight:600;margin-bottom:.45rem;color:var(--ink);
+  }
+  .beat p{font-size:.98rem;line-height:1.62;margin:0;color:var(--ink-soft)}
+  .beat p strong{color:var(--ink);font-weight:600}
+  .beat p .t{font-family:var(--mono);font-size:.72em;color:var(--accent);letter-spacing:.02em;white-space:nowrap}
+
+  /* columna de margen */
+  .margin{display:flex;flex-direction:column;gap:1.6rem}
+  @media(min-width:980px){.margin{position:sticky;top:5rem}}
+  .pull{
+    border-left:2px solid var(--accent);padding-left:1.15rem;
+  }
+  .pull blockquote{
+    margin:0;font-family:var(--display);font-style:italic;font-weight:400;
+    font-size:clamp(1.25rem,2vw,1.6rem);line-height:1.2;letter-spacing:-.01em;
+  }
+  .pull cite{
+    display:block;margin-top:.7rem;font-family:var(--mono);font-style:normal;
+    font-size:.6rem;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-faint);
+  }
+  .note{border-top:1px solid var(--rule-strong);padding-top:.7rem}
+  .note h5{font-family:var(--mono);font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin:0 0 .35rem;font-weight:600}
+  .note p{font-size:.82rem;line-height:1.5;margin:0;color:var(--ink-soft)}
+
+  /* cajas */
+  .verify{
+    margin-top:clamp(1.8rem,4vw,2.6rem);background:var(--paper-2);
+    border:1px solid var(--rule);border-left:2px solid var(--ink);
+    padding:clamp(1rem,2.4vw,1.5rem);
+  }
+  .verify h4{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;margin-bottom:.6rem}
+  .verify p{font-size:.9rem;line-height:1.55;margin:0;color:var(--ink-soft)}
+  .balance{
+    margin-top:1.6rem;padding-top:1rem;border-top:1px solid var(--rule-strong);
+  }
+  .balance h4{font-family:var(--mono);font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+  .balance p{font-size:.95rem;line-height:1.6;margin:0}
+
+  /* ---------- comparativa ---------- */
+  .compare{padding-block:clamp(3rem,7vw,6rem);background:var(--ink);color:var(--paper);position:relative}
+  .compare .kicker{color:#a89d8f}
+  .compare h2{font-size:clamp(2.2rem,7vw,5rem);text-transform:uppercase;margin-bottom:.6rem}
+  .compare h2 em{font-style:italic;font-weight:400;text-transform:none;color:#e2735c;display:block;font-size:.4em;margin-top:.3em}
+  .compare .intro{max-width:60ch;color:#c9bfb1;font-weight:300;margin-bottom:clamp(2rem,5vw,3.4rem)}
+
+  .block{margin-bottom:clamp(2.6rem,6vw,4rem)}
+  .block-head{display:flex;align-items:baseline;gap:1rem;border-bottom:1px solid rgba(242,237,228,.28);padding-bottom:.6rem;margin-bottom:1.2rem}
+  .block-head .n{font-family:var(--mono);font-size:.62rem;letter-spacing:.18em;color:#e2735c}
+  .block-head h3{font-size:clamp(1.35rem,3vw,2rem);text-transform:uppercase;letter-spacing:-.01em}
+
+  .tbl-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  table{width:100%;border-collapse:collapse;font-size:.88rem;line-height:1.5;min-width:640px}
+  thead th{
+    text-align:left;font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;
+    color:#a89d8f;font-weight:500;padding:.55rem .9rem .55rem 0;border-bottom:1px solid rgba(242,237,228,.22);
+    vertical-align:bottom;
+  }
+  tbody td{padding:.9rem .9rem .9rem 0;border-bottom:1px solid rgba(242,237,228,.12);vertical-align:top;color:#ddd4c6}
+  tbody tr:hover td{background:rgba(242,237,228,.045)}
+  tbody td:first-child{
+    font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;
+    color:#fff;font-weight:500;width:8.5rem;white-space:nowrap;
+  }
+  td .hl{color:#fff;font-weight:500}
+  td .q{font-style:italic;color:#f0a08e}
+
+  .listed{display:grid;gap:1rem}
+  @media(min-width:860px){.listed{grid-template-columns:repeat(3,1fr);gap:2rem}}
+  .listed article{border-top:1px solid rgba(242,237,228,.22);padding-top:.8rem}
+  .listed h4{font-family:var(--mono);font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:#fff;margin-bottom:.5rem}
+  .listed p{font-size:.85rem;line-height:1.5;color:#c9bfb1;margin:0}
+  .listed p b{color:#f0a08e;font-weight:500}
+
+  .moments{display:grid;gap:1.6rem;margin-top:clamp(2.4rem,5vw,3.4rem)}
+  @media(min-width:860px){.moments{grid-template-columns:repeat(3,1fr)}}
+  .moment{border-top:2px solid #e2735c;padding-top:1rem}
+  .moment .who{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:#a89d8f;margin-bottom:.6rem;display:block}
+  .moment blockquote{margin:0;font-family:var(--display);font-style:italic;font-size:clamp(1.1rem,2vw,1.45rem);line-height:1.25;color:#fff}
+  .moment .why{font-size:.8rem;color:#a89d8f;margin-top:.6rem;line-height:1.5}
+
+  /* ---------- footer ---------- */
+  footer{padding-block:clamp(2rem,5vw,3.4rem);border-top:1px solid var(--rule-strong)}
+  .foot-grid{display:grid;gap:1.6rem}
+  @media(min-width:760px){.foot-grid{grid-template-columns:2fr 1fr}}
+  footer h4{font-family:var(--mono);font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);margin-bottom:.5rem}
+  footer p{font-size:.82rem;line-height:1.55;color:var(--ink-soft);margin:0}
+  .colophon{font-family:var(--mono);font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);margin-top:2rem;border-top:1px solid var(--rule);padding-top:1rem;display:flex;flex-wrap:wrap;gap:.6rem 1.4rem;justify-content:space-between}
+
+  /* ---------- animaciones ---------- */
+  .js [data-reveal]{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.2,.7,.2,1),transform .7s cubic-bezier(.2,.7,.2,1)}
+  .js [data-reveal].in{opacity:1;transform:none}
+  .js [data-reveal][data-delay="1"]{transition-delay:.09s}
+  .js [data-reveal][data-delay="2"]{transition-delay:.18s}
+  .js [data-reveal][data-delay="3"]{transition-delay:.27s}
+  @media (prefers-reduced-motion:reduce){
+    .js [data-reveal]{opacity:1;transform:none;transition:none}
+  }
+
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+  @media print{
+    body::after,#progress,.nav{display:none}
+    body{background:#fff;color:#000;font-size:10.5pt}
+    .compare{background:#fff;color:#000}
+    .compare h2 em,.moment .who,tbody td:first-child{color:#000}
+    tbody td,.listed p{color:#222}
+    .cand{break-inside:avoid}
+  }
+</style>
+</head>
+<body>
+
+<div id="progress" aria-hidden="true"></div>
+
+<div class="masthead">
+  <div class="wrap masthead-inner">
+    <b>The Wild Project</b>
+    <span class="dot">●</span>
+    <span>Especial Elecciones</span>
+    <span class="dot">●</span>
+    <span>Monográfico</span>
+    <span style="margin-left:auto">13 · 11 · 2026</span>
+  </div>
+</div>
+
+<nav class="nav" aria-label="Secciones">
+  <div class="wrap">
+    <ul>
+      <li><a href="#colau" data-nav>01 · Colau</a></li>
+      <li><a href="#feijoo" data-nav>02 · Feijóo</a></li>
+      <li><a href="#sanchez" data-nav>03 · Sánchez</a></li>
+      <li><a href="#comparativa" data-nav>Comparativa</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero">
+  <span class="hero-num" aria-hidden="true">03</span>
+  <div class="wrap">
+    <p class="hero-kicker">Tres entrevistas · Un mismo interrogatorio</p>
+    <h1 class="hero-title">
+      El cara<br>a cara
+      <span class="thin">Colau · Feijóo · Sánchez</span>
+    </h1>
+    <div class="hero-grid">
+      <p class="hero-lede">
+        Jordi Wild citó a los candidatos a la presidencia con un contrato de no edición
+        sobre la mesa. Vinieron tres. <strong>Cinco horas y media</strong> de preguntas incómodas,
+        dos verificadores en la sala y un mismo repertorio de temas: inmigración, Ceuta,
+        vivienda, corrupción y trenes.
+      </p>
+      <div class="stats">
+        <div class="stat"><b>3</b><span>Entrevistas</span></div>
+        <div class="stat"><b>5h34</b><span>Duración total</span></div>
+        <div class="stat"><b>70.020</b><span>Palabras</span></div>
+        <div class="stat"><b>2</b><span>Verificadores</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="ficha">
+  <div class="wrap ficha-grid">
+    <div data-reveal>
+      <h4>El formato</h4>
+      <p>Duración pactada de 60 a 90 minutos, entrevista íntegra sin cortes y dos verificadores
+      externos —<em>Iván Muñoz</em> y <em>Javier Collado</em>— para contrastar datos de entrevistador
+      y entrevistado. Los cuatro candidatos firmaron el acuerdo.</p>
+    </div>
+    <div data-reveal data-delay="1">
+      <h4>La ausencia</h4>
+      <p>Santiago Abascal canceló la víspera exigiendo los derechos audiovisuales de la grabación.
+      Jordi lo anunció en un comunicado de 14 minutos: «las cosas no se hacen así».</p>
+    </div>
+    <div data-reveal data-delay="2">
+      <h4>El método</h4>
+      <p>Transcripción automática del audio con Whisper y lectura íntegra de las tres conversaciones.
+      Las citas son literales; los tiempos remiten al minuto exacto del vídeo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ 01 COLAU ══════════════════ -->
+<article class="cand" id="colau">
+  <div class="wrap">
+    <header class="cand-head" data-reveal>
+      <span class="cand-num" aria-hidden="true">01</span>
+      <div>
+        <p class="kicker">The Wild Project #391</p>
+        <h2>Ada <em>Colau</em></h2>
+        <ul class="meta">
+          <li><b>2h14</b> duración</li>
+          <li><b>29.814</b> palabras</li>
+          <li>Estreno 13/11 · 08:00</li>
+          <li><a href="https://www.youtube.com/watch?v=-ESmAhdixfo" target="_blank" rel="noopener">Ver vídeo ↗</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="cand-body">
+      <div class="cand-main">
+        <p class="lead" data-reveal>
+          Jordi abre avisando de que «no va a ser fácil». Colau entra relajada —aceptó en buena
+          parte porque su hijo de quince años se lo pidió— y aguanta una presión educada pero
+          constante: citas textuales leídas en voz alta, exigencias de sí o no y evasivas
+          señaladas en directo.
+        </p>
+
+        <div class="beat" data-reveal><h3>Twitter y coherencia</h3>
+          <p>Regreso a X tras haberla abandonado siendo alcaldesa. Jordi: usa Instagram «de
+          Zuckerberg, el mismo perro con diferente collar». Ella concede que las redes están en
+          manos de corporaciones con dueños cercanos a la extrema derecha y que «X es follonera»;
+          aclara que la cuenta la lleva el equipo, no ella.</p></div>
+
+        <div class="beat" data-reveal><h3>Del «no me presento» a candidata</h3>
+          <p>Jordi le lee su declaración de noviembre de 2025: «no tengo intención de presentarme
+          ni a primarias, ni a próximas elecciones». Responde que era «100% sincera» y sitúa el
+          giro en el desahucio de Mari Carmen, de 87 años, y en que PP, Junts y Vox tumbaron dos
+          decretos de vivienda.</p></div>
+
+        <div class="beat" data-reveal><h3>La izquierda dividida</h3>
+          <p>Sobre su «si estamos todas, también estaré»: <span class="t">[00:17:17]</span>
+          <strong>«No era un farol»</strong>. Asegura que puso su candidatura a disposición y que
+          Podemos «no quiso ni sentarse a hablar». Jordi señala que quince formaciones sí van
+          juntas y Podemos no.</p></div>
+
+        <div class="beat" data-reveal><h3>Corrupción</h3>
+          <p>Ábalos, Koldo y Cerdán, y el hecho de que Sumar siguiera en el Gobierno. Responde con
+          «tolerancia cero», la distinción entre «manzana podrida» y «cesta», y cero casos en su
+          alcaldía. A un sí o no sobre romper el Ejecutivo: «es difícil decirlo siempre desde fuera».</p></div>
+
+        <div class="beat" data-reveal><h3>Trenes</h3>
+          <p>No pedía la dimisión de Puente tras el primer accidente —poco tiempo en el cargo—,
+          sí tras el segundo. Y no la de Sánchez: «lo habitual es que la responsabilidad la asuma
+          quien tiene la responsabilidad de ese tema concreto». Su tesis: desinversión acumulada,
+          separación Renfe-Adif, mantenimiento subcontratado, +40% de trenes con solo +10% de personal.</p></div>
+
+        <div class="beat" data-reveal><h3>Ceuta y Marruecos</h3>
+          <p>No señala un único responsable: apunta a Marruecos —«70.000 personas no se mueven sin
+          que se dé cuenta»— y a la UE por externalizar fronteras. Reconoce que Sánchez no debía
+          estar de vacaciones. Sobre el CNI: «no tengo elementos, no quiero hacer demagogia».</p></div>
+
+        <div class="beat" data-reveal><h3>Inmigración</h3>
+          <p>Jordi saca Manresa, el CIS y Aliança Catalana, y le reprocha falta de autocrítica.
+          Ella responde con la memoria migratoria interna —sus padres, de Huesca y Soria— y niega
+          el vínculo entre inmigración y delincuencia. Ante la proyección del INE, el problema no
+          es dónde nace la gente sino el proyecto de país.</p></div>
+
+        <div class="beat" data-reveal><h3>Barcelona y vivienda</h3>
+          <p>Con el barómetro en mano —5,8 al entrar, mínimo de 4,1 en 2022— Jordi le pide un error
+          concreto. Tras varios rodeos admite la Copa América y la recogida de basura en Sant
+          Andreu. En vivienda: precios por ley con índices salariales, impuesto del 10% a grandes
+          tenedores con pisos vacíos, expropiación pagada a los trece fondos con más de 100.000
+          pisos y pequeño propietario hasta la tercera vivienda.</p></div>
+
+        <div class="beat" data-reveal><h3>Cierre</h3>
+          <p>Cerraría las bases americanas —«me gustaría hacerlo»—, llama a Trump «peligro con
+          patas» y defiende la flotilla frente a Jordi. Define a Sánchez como buen comunicador que
+          solo actúa bajo presión, a Feijóo como «bastante sincero» y a Abascal como «persona
+          cruel, muy cruel».</p></div>
+
+        <div class="verify" data-reveal>
+          <h4>Verificación</h4>
+          <p>Los verificadores entran tarde, a 1h23, y Jordi se disculpa: «he ido tan enchufado».
+          Se valida el dato del <strong>91% de detenidos por hurto extranjeros en Barcelona en 2024</strong>,
+          que ella había cuestionado con su experiencia en la Junta Local de Seguridad y que
+          termina aceptando —«pues me lo creo, es cierto»—, con la matización de que en el total
+          de delitos la primera nacionalidad es la española.</p>
+        </div>
+
+        <div class="balance" data-reveal>
+          <h4>Balance</h4>
+          <p>Jordi fue más duro de lo que el formato sugería, aunque por momentos entra al debate
+          y pierde el interrogatorio. Colau conserva su marco y tiene autocrítica real, pero sus
+          dos flancos son la coherencia —el «no me presentaré» y el ultimátum de la unidad quedan
+          sin cerrar— y la inmigración, donde la conversación deriva en choque de marcos más que
+          en intercambio de datos.</p>
+        </div>
+      </div>
+
+      <aside class="margin">
+        <div class="pull" data-reveal data-delay="1">
+          <blockquote>«No me impacta»</blockquote>
+          <cite>Sobre la proyección demográfica · 01:23:09</cite>
+        </div>
+        <div class="note" data-reveal data-delay="2">
+          <h5>El pico de tensión</h5>
+          <p>Cuando relativiza los 44 asesinatos machistas por población, Jordi corta:
+          «¡Ada, eso es de magufada!». Es el momento en que se ve obligada a matizar.</p>
+        </div>
+        <div class="note" data-reveal data-delay="3">
+          <h5>La frase del entrevistador</h5>
+          <p>«Te he pedido otra crítica y no me has dicho ni una»
+          <span style="font-family:var(--mono);font-size:.72em;color:var(--accent)">[01:29:09]</span>,
+          tras tres respuestas seguidas sobre el suspenso ciudadano.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</article>
+
+<!-- ══════════════════ 02 FEIJOO ══════════════════ -->
+<article class="cand" id="feijoo">
+  <div class="wrap">
+    <header class="cand-head" data-reveal>
+      <span class="cand-num" aria-hidden="true">02</span>
+      <div>
+        <p class="kicker">The Wild Project #392</p>
+        <h2>Alberto Núñez <em>Feijóo</em></h2>
+        <ul class="meta">
+          <li><b>1h28</b> duración</li>
+          <li><b>17.068</b> palabras</li>
+          <li>Estreno 13/11 · 10:00</li>
+          <li><a href="https://www.youtube.com/watch?v=1YlGArMx_N4" target="_blank" rel="noopener">Ver vídeo ↗</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="cand-body">
+      <div class="cand-main">
+        <p class="lead" data-reveal>
+          Fue el primero en aceptar cuando Jordi esperaba lo contrario. Llega relajado, con guion
+          defensivo y el argumento de que «no tenemos nada que ocultar». La primera hora es
+          cordial; el tono se rompe en Marcial Dorado y en corrupción.
+        </p>
+
+        <div class="beat" data-reveal><h3>Vox y los pactos</h3>
+          <p>No entra en la ausencia de Abascal: respeta la estrategia de cada partido. Se define
+          como político «de centralidad» y atribuye la polarización a Sánchez: «hay un político en
+          España que vive de la fractura». Sus discrepancias con Vox son Europa y el Estado de las
+          autonomías. <strong>Se niega tres veces a decir qué ministerios son intocables</strong>:
+          «no voy a concretar mi estrategia de negociación». Anuncia 14 o 15 carteras, sin Igualdad
+          ni Vivienda.</p></div>
+
+        <div class="beat" data-reveal><h3>Pensiones</h3>
+          <p>No da un sí o un no al «¿va a petar?»: lo condiciona al crecimiento. Sostiene que la
+          economía creció por población —más de cuatro millones, «todos inmigrantes», por saldo
+          vegetativo negativo—, no por productividad, y cifra en unos 50.000 millones la
+          transferencia de impuestos al sistema. Promete revalorizar según el IPC y zanja:
+          <strong>«no vamos a ampliar la edad de jubilación… hasta los 67 y punto»</strong>.</p></div>
+
+        <div class="beat" data-reveal><h3>Absentismo y autónomos</h3>
+          <p>Su tramo más cómodo: de 13.000 a más de 30.000 millones de gasto, y de 450.000 a más
+          de un millón de ausentes diarios, con picos los lunes y los viernes. Para los autónomos
+          despliega catálogo: estatuto propio, cuota cero para nuevos, libertad de declarar
+          trimestral o anual, exención por maternidad y sin IVA por debajo de 85.000 euros.</p></div>
+
+        <div class="beat" data-reveal><h3>Deuda gallega y defensa</h3>
+          <p>Jordi le ataca con su propio registro —de 4.000 a 12.000 millones en Galicia—.
+          Responde con ingresos inflados heredados, España al borde de la intervención en 2011-12
+          y el dato de que Galicia fue la tercera comunidad con menor incremento. En defensa:
+          «si no puedo llegar al 2,4, pues me quedaré en el 2,3; lo que no voy a hacer es mentir».</p></div>
+
+        <div class="beat" data-reveal><h3>Ceuta</h3>
+          <p>Habría actuado con los informes del CNI de finales de julio —seguimiento de más de
+          180.000 perfiles—, habría llamado a Rabat y habría escalado a la UE. Si no hay respuesta:
+          «cogería la Constitución… y avisaría a Marruecos que voy a desplegar el ejército en la
+          frontera». A la pregunta de si daría orden de disparar: «eso es una trampa».</p></div>
+
+        <div class="beat" data-reveal><h3>Inmigración</h3>
+          <p>El punto más evasivo. Ante el caso práctico —un español que nunca cotizó frente a un
+          extranjero con veinte años cotizados— responde con el eslogan. Después: objetivar por
+          censo, arraigo y cotización, recortar el IMV hasta cero con un «camino hacia el empleo»
+          y la máxima <strong>«lo irregular no puede producir derecho»</strong>.</p></div>
+
+        <div class="beat" data-reveal><h3>Marcial Dorado</h3>
+          <p>El cara a cara más duro, en el minuto 57. Se escuda en su comparecencia de 2013:
+          conoció a Dorado en Vilagarcía cuando «solo tenía contrabando de tabaco», y rompió al
+          saber del juicio. Rechaza la palabra «amigos» —«no estábamos solos en esa foto»— y
+          contraataca: <strong>«yo lo que no tengo fotos es con prostitutas financiadas con fondos
+          públicos»</strong>.</p></div>
+
+        <div class="beat" data-reveal><h3>Gürtel, Rajoy y Ayuso</h3>
+          <p>Acepta que la financiación irregular es delito y que la Gürtel «le costó el gobierno»
+          a Rajoy. Pero a «¿habrías pedido su dimisión?»: «pues no lo sé… tendría que ir a ver los
+          datos exactos». Sobre Ayuso niega guerra interna —«el PP no es una secta, ni yo soy
+          Sánchez»— y del piso de 6,7 millones dice que «es caro… me parece muy caro cuando España
+          está como está».</p></div>
+
+        <div class="beat" data-reveal><h3>Cierre</h3>
+          <p>«Yo no sé inglés, pero sé gobernar». Descarta el servicio militar obligatorio, avisa
+          de que la frontera sur tiene «un riesgo potencial mayor» que la este, dice de Trump que
+          «se acaba de llevar un buen varapalo» y define a Sánchez como «una gran decepción».</p></div>
+
+        <div class="verify" data-reveal>
+          <h4>Verificación</h4>
+          <p>Los verificadores apenas se oyen; las correcciones vienen de Jordi. La más clara: él
+          cifra el absentismo de los autónomos en el 3,5-4% y Jordi lo corrige al 1% —
+          <strong>«le agradezco esa rectificación»</strong>, el único error que reconoce—. También
+          corrige la fecha de la foto de Dorado: 1994-95, no 1996.</p>
+        </div>
+
+        <div class="balance" data-reveal>
+          <h4>Balance</h4>
+          <p>Guion intacto, sin error grueso y sin ninguna respuesta que rompa su marco. Domina el
+          detalle económico y autonómico, y aguanta Ceuta con una firmeza más contundente que
+          concreta. Vulnerable en tres puntos: la evasiva de la «prioridad nacional», el «no lo
+          sé» sobre Rajoy y Marcial Dorado, donde la explicación es idéntica a la de 2013 y él lo
+          sabe —«la he explicado mil veces»—.</p>
+        </div>
+      </div>
+
+      <aside class="margin">
+        <div class="pull" data-reveal data-delay="1">
+          <blockquote>«Yo no sé inglés, pero sé gobernar»</blockquote>
+          <cite>01:18:21</cite>
+        </div>
+        <div class="note" data-reveal data-delay="2">
+          <h5>La evasiva más limpia</h5>
+          <p>«La prioridad nacional es cambiar el gobierno»
+          <span style="font-family:var(--mono);font-size:.72em;color:var(--accent)">[00:49:41]</span>.
+          Jordi le pone un caso concreto y él lo convierte en eslogan. Se ríen los dos.</p>
+        </div>
+        <div class="note" data-reveal data-delay="3">
+          <h5>El único «no lo sé»</h5>
+          <p>Sobre pedir la dimisión de Rajoy por la Gürtel. Es la única vez que se queda sin
+          respuesta preparada en toda la entrevista.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</article>
+
+<!-- ══════════════════ 03 SANCHEZ ══════════════════ -->
+<article class="cand" id="sanchez">
+  <div class="wrap">
+    <header class="cand-head" data-reveal>
+      <span class="cand-num" aria-hidden="true">03</span>
+      <div>
+        <p class="kicker">The Wild Project #393</p>
+        <h2>Pedro <em>Sánchez</em></h2>
+        <ul class="meta">
+          <li><b>1h52</b> duración</li>
+          <li><b>23.138</b> palabras</li>
+          <li>Estreno 13/11 · 12:00</li>
+          <li><a href="https://www.youtube.com/watch?v=mStOFBvToUI" target="_blank" rel="noopener">Ver vídeo ↗</a></li>
+        </ul>
+      </div>
+    </header>
+
+    <div class="cand-body">
+      <div class="cand-main">
+        <p class="lead" data-reveal>
+          «Día histórico», dice Jordi, que le avisa de que será «de las cuatro la más dura» porque
+          lleva ocho años gobernando: «mi misión hoy es ponerte en un aprieto». Sánchez agradece
+          la ocasión de «explicarme» y arranca con la tesis de que España está mejor en 2026 que
+          en 2018.
+        </p>
+
+        <div class="beat" data-reveal><h3>Por qué sigue</h3>
+          <p>¿Ego o servicio? «Es un tema de servicio». Reconstruye su vocación a los 15 o 16 años:
+          abuelos analfabetos, un abuelo emigrante cuarenta años en Alemania durante el franquismo,
+          «una herida de compromiso con la justicia social». Y el argumento final: es momento de
+          «dar un paso al frente y no un paso al lado».</p></div>
+
+        <div class="beat" data-reveal><h3>Insultos y crispación</h3>
+          <p>Los cánticos de «hijo de puta» le duelen sobre todo por sus hijas, que han tenido que
+          salir de locales. Detrás ve «una carencia total de argumentos y de proyecto político» y
+          sostiene que «los insultos son asimétricos, la polarización es asimétrica». Jordi le
+          recuerda que el juego sucio es bidireccional.</p></div>
+
+        <div class="beat" data-reveal><h3>Trenes</h3>
+          <p>Rechaza la dimisión tras el primer accidente y habla de revertir el subfinanciamiento
+          de la etapa de Rajoy: «quince años hemos tardado». Anuncia auditoría extraordinaria de
+          la línea Madrid-Sevilla y 19.000 millones de euros a mantenimiento entre 2026 y 2030.
+          Admite «fallos y errores» en el control de mandos y defiende la salida de Puente como
+          decisión del ministro.</p></div>
+
+        <div class="beat" data-reveal><h3>Ceuta y Marruecos</h3>
+          <p>Niega el informe previo del CNI —«no, no había ese informe»— y habla de un bulo sobre
+          una sentencia del Supremo y de la diferencia de renta ×8 en la frontera. Cuando Jordi
+          insiste en que las fuerzas marroquíes guiaron a los migrantes: «eso no lo sabemos
+          todavía». Defiende la «buena vecindad» con Rabat por migración, terrorismo e inversiones.</p></div>
+
+        <div class="beat" data-reveal><h3>Las vacaciones</h3>
+          <p>Lo niega con una de las frases del día: «un presidente está 24/7, 365 días al año y no
+          tiene código postal»; estaba con su familia «en otra residencia oficial del gobierno…
+          trabajando full time». Reconoce que la crisis «no se gestionó bien» y que los ceutíes
+          estarán «probablemente» enfadados.</p></div>
+
+        <div class="beat" data-reveal><h3>Inmigración</h3>
+          <p>Acepta el diagnóstico de integración fallida y admite que la izquierda «en muchas
+          ocasiones no le presta la suficiente atención». Aporta datos: 25% del crecimiento
+          económico por migración, 40% europeos y 40% latinoamericanos, entre 5% y 10% de migración
+          irregular, 1,2 millones de regularizados y medio millón cotizando.</p></div>
+
+        <div class="beat" data-reveal><h3>Ábalos, Koldo y Cerdán</h3>
+          <p>«Me avergüenza», «es una condena muy fuerte». Reconoce que Ábalos y Cerdán «han sido
+          amigos» y que con Koldo «no tenía prácticamente comunicación». Los elogios que le leen
+          los data en 2014 y 2016, «en plena carrera por la Secretaría General», y los llama
+          «reconocimiento», no amistad.</p></div>
+
+        <div class="beat" data-reveal><h3>Vivienda</h3>
+          <p>Ante el joven de 25 años con 1.300 euros: «es difícil». Contrapone Manresa y Málaga
+          para hablar de pisos turísticos, defiende construir más vivienda protegida y regular
+          alquileres. Con las 184.000 viviendas prometidas en diciembre de 2023 se queda en «en
+          proceso de entrega».</p></div>
+
+        <div class="beat" data-reveal><h3>La hemeroteca</h3>
+          <p>Jordi lee la lista: amnistía, indultos, Bildu, independencia judicial, Pablo Iglesias,
+          Sáhara, topes de alquiler, ley mordaza. <strong>«Efectivamente, cambié de opinión, y
+          además lo he reconocido»</strong>; sitúa el giro en 2019, en un hospital catalán. Sobre
+          Bildu: «yo no he gobernado con Bildu… yo busco votos hasta debajo de las piedras».</p></div>
+
+        <div class="beat" data-reveal><h3>Cierre</h3>
+          <p>Colau es «activista», Feijóo «conservador» y Abascal merece un chiste sobre el sastre
+          antes de añadir que «no es bueno vivir en el rencor y en la revancha permanente». Cierra
+          pidiendo el voto: <strong>«nos estamos jugando la involución»</strong>.</p></div>
+
+        <div class="verify" data-reveal>
+          <h4>Verificación</h4>
+          <p>Los verificadores precisan que en stock de residentes extranjeros Marruecos es el
+          primer país —él se ajusta: «ah, Marruecos, el segundo»—, le piden fechas antes de dar
+          por buenos los elogios a Koldo, no discute los 43.225 euros que la UCO atribuye a Leire
+          Díez y no reconoce como propia la cita sobre Pablo Iglesias. <strong>No rectifica ninguna
+          cifra de forma explícita.</strong></p>
+        </div>
+
+        <div class="balance" data-reveal>
+          <h4>Balance</h4>
+          <p>Marco intacto y varias concesiones tácticas —«tienes toda la razón», «cambié de
+          opinión»—. Vulnerable en vivienda, donde no puede dar el dato de entregas; en el cara a
+          cara del 155 a la amnistía, resuelto con «la política no es una foto fija»; y con los
+          elogios a Koldo. Jordi fue duro e insistente en trenes, Ceuta, corrupción y hemeroteca,
+          sin descalificaciones.</p>
+        </div>
+      </div>
+
+      <aside class="margin">
+        <div class="pull" data-reveal data-delay="1">
+          <blockquote>«No te quiero decir ahora mismo el dato»</blockquote>
+          <cite>Sobre las 184.000 viviendas prometidas · 01:30:26</cite>
+        </div>
+        <div class="note" data-reveal data-delay="2">
+          <h5>La defensa de Ceuta</h5>
+          <p>«Yo no tengo información para acusar a todo un gobierno de esto»
+          <span style="font-family:var(--mono);font-size:.72em;color:var(--accent)">[00:36:03]</span>.
+          Es la respuesta que repite tres veces sin ceder.</p>
+        </div>
+        <div class="note" data-reveal data-delay="3">
+          <h5>La única concesión clara</h5>
+          <p>«Sí, tienes toda la razón»
+          <span style="font-family:var(--mono);font-size:.72em;color:var(--accent)">[00:24:20]</span>,
+          al distinguir Jordi una catástrofe natural de la mala conservación de una red pública.</p>
+        </div>
+      </aside>
+    </div>
+  </div>
+</article>
+
+<!-- ══════════════════ COMPARATIVA ══════════════════ -->
+<section class="compare" id="comparativa">
+  <div class="wrap">
+    <p class="kicker" data-reveal>Los mismos temas · las tres respuestas</p>
+    <h2 data-reveal>Frente <em>a frente</em></h2>
+    <p class="intro" data-reveal>
+      Leídas en paralelo, las tres entrevistas dibujan tres formas distintas de esquivar. Estos
+      son los cinco bloques donde se ven mejor las distancias.
+    </p>
+
+    <div class="block" data-reveal>
+      <div class="block-head"><span class="n">01</span><h3>Inmigración</h3></div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th scope="col">Candidato</th><th scope="col">Postura</th><th scope="col">Momento</th></tr></thead>
+          <tbody>
+            <tr><td>Colau</td><td>Marco cultural: memoria migratoria interna y negativa a leer la demografía como problema. Acepta el 91% de hurtos tras la verificación.</td><td class="q">«No me impacta» <span class="hl">[01:23:09]</span></td></tr>
+            <tr><td>Feijóo</td><td>Orden y control: expulsiones, reglamento de retorno, IMV recortado hasta cero. «Lo irregular no puede producir derecho».</td><td class="q">«La prioridad nacional es cambiar el gobierno» <span class="hl">[00:49:41]</span></td></tr>
+            <tr><td>Sánchez</td><td>Acepta el diagnóstico de integración fallida; responde con datos macro: 25% del crecimiento, 1,2 millones de regularizados.</td><td class="q">«¿Sociedad próspera o decadente?»</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="block" data-reveal>
+      <div class="block-head"><span class="n">02</span><h3>Ceuta y Marruecos</h3></div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th scope="col">Candidato</th><th scope="col">¿Avisó el CNI?</th><th scope="col">Responsable</th></tr></thead>
+          <tbody>
+            <tr><td>Colau</td><td>«No tengo elementos, no quiero hacer demagogia»</td><td>Marruecos y la UE por externalizar fronteras</td></tr>
+            <tr><td>Feijóo</td><td class="hl">Sí: informes de finales de julio y 180.000 perfiles monitorizados</td><td>Marruecos «por acción u omisión» y el Gobierno; propone desplegar el ejército</td></tr>
+            <tr><td>Sánchez</td><td class="hl">«No, no había ese informe»</td><td>Nadie; habla de un bulo sobre una sentencia del Supremo</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="block" data-reveal>
+      <div class="block-head"><span class="n">03</span><h3>Vivienda</h3></div>
+      <div class="listed">
+        <article>
+          <h4>Colau · la más concreta</h4>
+          <p>Precios por ley con índices salariales, impuesto del 10% a grandes tenedores con pisos
+          vacíos, expropiación pagada a los trece fondos con más de 100.000 pisos y pequeño
+          propietario hasta la tercera vivienda.</p>
+        </article>
+        <article>
+          <h4>Feijóo · la gran ausente</h4>
+          <p>Apenas aparece en 1h28. Solo dos ideas: <b>no habrá Ministerio de Vivienda</b> y un
+          millón de casas crearán 500.000 empleos.</p>
+        </article>
+        <article>
+          <h4>Sánchez · objetivos sin cifra</h4>
+          <p>Más vivienda protegida y regulación de alquileres. De las 184.000 prometidas en 2023:
+          «en proceso de entrega» y <b>«no te quiero decir ahora mismo el dato»</b>.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="block" data-reveal>
+      <div class="block-head"><span class="n">04</span><h3>Corrupción</h3></div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th scope="col">Candidato</th><th scope="col">Su caso</th><th scope="col">El caso del rival</th></tr></thead>
+          <tbody>
+            <tr><td>Colau</td><td>«Tolerancia cero», cero casos en la alcaldía; distingue «manzana podrida» de «cesta».</td><td>Ábalos y Koldo: «se apartaron inmediatamente». No responde si habría roto el Gobierno.</td></tr>
+            <tr><td>Feijóo</td><td>La Gürtel «le costó el gobierno» a Rajoy; el tesorero le «repugnaba».</td><td>Ábalos, Cerdán y Koldo con detalle: contrato a los 18 días, 46% de una constructora.</td></tr>
+            <tr><td>Sánchez</td><td>«Me avergüenza», «han sido amigos», condena «muy fuerte».</td><td>No se le pregunta por la Gürtel de forma directa.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="block" data-reveal>
+      <div class="block-head"><span class="n">05</span><h3>Trenes</h3></div>
+      <div class="listed">
+        <article>
+          <h4>Colau · el modelo</h4>
+          <p>Desinversión, Renfe-Adif, mantenimiento subcontratado, +40% de trenes con +10% de
+          personal. No pidió la dimisión de Puente tras el primer accidente, <b>sí tras el segundo</b>.</p>
+        </article>
+        <article>
+          <h4>Feijóo · el vacío</h4>
+          <p>Prácticamente no se abordó. Solo una mención de pasada a «la sanidad, los trenes»,
+          dentro del debate sobre servicios públicos.</p>
+        </article>
+        <article>
+          <h4>Sánchez · la defensa</h4>
+          <p>«El sistema es seguro», auditoría de Madrid-Sevilla, 19.000 millones a mantenimiento y
+          «fallos y errores» en el control de mandos.</p>
+        </article>
+      </div>
+    </div>
+
+    <div class="block" data-reveal>
+      <div class="block-head"><span class="n">06</span><h3>Cómo se comportaron</h3></div>
+      <div class="tbl-wrap">
+        <table>
+          <thead><tr><th scope="col">Candidato</th><th scope="col">Actitud</th><th scope="col">Dureza de Jordi</th></tr></thead>
+          <tbody>
+            <tr><td>Colau</td><td>Verborrea, deriva al marco y evasivas señaladas en directo.</td><td>Alta pero desigual: por momentos entra al debate y pierde el interrogatorio.</td></tr>
+            <tr><td>Feijóo</td><td>Guion intacto y contraataque cuando se le acorrala.</td><td>Media: más debate que interrogatorio.</td></tr>
+            <tr><td>Sánchez</td><td>Concesiones tácticas y evasiva en todo lo concreto.</td><td class="hl">La más alta de las tres, y anunciada desde el minuto uno.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="moments" data-reveal>
+      <div class="moment">
+        <span class="who">01 · Colau</span>
+        <blockquote>«No me impacta»</blockquote>
+        <p class="why">El rechazo a leer la demografía como problema, dicho sin matices.</p>
+      </div>
+      <div class="moment">
+        <span class="who">02 · Feijóo</span>
+        <blockquote>«Yo no sé inglés, pero sé gobernar»</blockquote>
+        <p class="why">Y antes, un «no lo sé» sobre Rajoy: la única vez sin respuesta preparada.</p>
+      </div>
+      <div class="moment">
+        <span class="who">03 · Sánchez</span>
+        <blockquote>«No te quiero decir ahora mismo el dato»</blockquote>
+        <p class="why">La promesa sin cifra de cumplimiento, en el bloque de vivienda.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <h4>Nota metodológica</h4>
+        <p>Transcripciones automáticas del audio de YouTube con Whisper (modelo <em>small</em>,
+        español), revisadas mediante lectura íntegra. Duraciones y capítulos provienen de la
+        descripción oficial de cada vídeo. Las citas son literales según la transcripción y
+        pueden contener errores en nombres propios o cifras. Este monográfico resume lo que se
+        dijo en las entrevistas; no es una valoración editorial de los candidatos.</p>
+      </div>
+      <div>
+        <h4>Fuentes</h4>
+        <p>
+          <a href="https://www.youtube.com/watch?v=-ESmAhdixfo" target="_blank" rel="noopener">#391 · Ada Colau ↗</a><br>
+          <a href="https://www.youtube.com/watch?v=1YlGArMx_N4" target="_blank" rel="noopener">#392 · Alberto Núñez Feijóo ↗</a><br>
+          <a href="https://www.youtube.com/watch?v=mStOFBvToUI" target="_blank" rel="noopener">#393 · Pedro Sánchez ↗</a>
+        </p>
+      </div>
+    </div>
+    <div class="colophon">
+      <span>The Wild Project · Especial Elecciones</span>
+      <span>70.020 palabras transcritas · 5h34 de audio</span>
+      <span>13 de noviembre de 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.documentElement.classList.add('js');
+
+  // barra de progreso
+  const bar = document.getElementById('progress');
+  const onScroll = () => {
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    bar.style.width = (max > 0 ? (h.scrollTop / max) * 100 : 0) + '%';
+  };
+  addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // revelado al entrar en pantalla
+  const items = document.querySelectorAll('[data-reveal]');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+    items.forEach((el) => io.observe(el));
+  } else {
+    items.forEach((el) => el.classList.add('in'));
+  }
+
+  // sección activa en la nav
+  const links = [...document.querySelectorAll('[data-nav]')];
+  const targets = links.map((a) => document.querySelector(a.getAttribute('href'))).filter(Boolean);
+  if ('IntersectionObserver' in window) {
+    const navIo = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          links.forEach((l) => l.setAttribute('aria-current',
+            l.getAttribute('href') === '#' + e.target.id ? 'true' : 'false'));
+        }
+      });
+    }, { rootMargin: '-45% 0px -50% 0px' });
+    targets.forEach((t) => navIo.observe(t));
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,9 @@
+# Transcripciones completas: no se publican (contenido de terceros).
+*.txt
+*.m4a
+*.wav
+*.log
+
+# Sistema
+.DS_Store
+Thumbs.db
